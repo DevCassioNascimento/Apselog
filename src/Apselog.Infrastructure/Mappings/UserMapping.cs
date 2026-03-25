@@ -38,6 +38,10 @@ public class UserMapping : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(150);
 
+        builder.Property(x => x.Role)
+            .IsRequired()
+            .HasConversion<int>();
+
         builder.Property(x => x.Status)
             .IsRequired()
             .HasConversion<int>();

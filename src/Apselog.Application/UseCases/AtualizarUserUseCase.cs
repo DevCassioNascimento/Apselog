@@ -46,6 +46,7 @@ public class AtualizarUserUseCase : IAtualizarUserUseCase
         user.Email = request.Email;
         user.Cargo = request.Cargo;
         user.Instituicao = request.Instituicao;
+        user.Role = request.Role;
         user.Status = request.Status;
 
         if (!string.IsNullOrWhiteSpace(request.Senha))
@@ -62,6 +63,7 @@ public class AtualizarUserUseCase : IAtualizarUserUseCase
             Email = user.Email,
             Cargo = user.Cargo,
             Instituicao = user.Instituicao,
+            Role = user.Role,
             Status = user.Status
         };
     }

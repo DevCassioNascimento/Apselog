@@ -10,5 +10,6 @@ public class User
     public required string SenhaHash { get; set; }
     public required string Cargo { get; set; }
     public required string Instituicao { get; set; }
+    public UserRole Role { get; set; } = UserRole.Usuario;
     public UserStatus Status { get; set; } = UserStatus.Ativo;
 }

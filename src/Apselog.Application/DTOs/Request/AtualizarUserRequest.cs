@@ -10,5 +10,6 @@ public class AtualizarUserRequest
     public string? Senha { get; set; }
     public required string Cargo { get; set; }
     public required string Instituicao { get; set; }
+    public UserRole Role { get; set; }
     public UserStatus Status { get; set; }
 }

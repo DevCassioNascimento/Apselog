@@ -9,5 +9,6 @@ public class UserResponse
     public required string Email { get; set; }
     public required string Cargo { get; set; }
     public required string Instituicao { get; set; }
+    public UserRole Role { get; set; }
     public UserStatus Status { get; set; }
 }

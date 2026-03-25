@@ -9,5 +9,6 @@ public class CriarUserRequest
     public required string Senha { get; set; }
     public required string Cargo { get; set; }
     public required string Instituicao { get; set; }
+    public UserRole Role { get; set; } = UserRole.Usuario;
     public UserStatus Status { get; set; } = UserStatus.Ativo;
 }

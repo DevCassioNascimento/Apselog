@@ -48,6 +48,7 @@ public class CriarUserUseCase : ICriarUserUseCase
             SenhaHash = GerarHashSenha(request.Senha),
             Cargo = request.Cargo,
             Instituicao = request.Instituicao,
+            Role = request.Role,
             Status = request.Status
         };
 
@@ -60,6 +61,7 @@ public class CriarUserUseCase : ICriarUserUseCase
             Email = user.Email,
             Cargo = user.Cargo,
             Instituicao = user.Instituicao,
+            Role = user.Role,
             Status = user.Status
         };
     }
