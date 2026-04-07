@@ -21,17 +21,20 @@ public class CriarEntregaUseCase : ICriarEntregaUseCase
 
         var entrega = new Domain.Entities.Entrega
         {
+            Codigo = request.Codigo,
             Nome = request.Nome,
-            Cidade = request.Cidade,
-            Estado = request.Estado,
-            Cep = request.Cep,
-            Bairro = request.Bairro,
-            Rua = request.Rua,
-            Numero = request.Numero,
-            Complemento = request.Complemento,
+            Descricao = request.Descricao,
+            Observacoes = request.Observacoes,
+            ClienteNome = request.ClienteNome,
+            ClienteTelefone = request.ClienteTelefone,
             DataPedido = request.DataPedido,
+            DataPrevista = request.DataPrevista,
+            PrevisaoChegada = request.PrevisaoChegada,
             DataEntrega = request.DataEntrega,
-            Entregador = request.Entregador,
+            EnderecoId = request.EnderecoId,
+            MotoristaId = request.MotoristaId,
+            VeiculoId = request.VeiculoId,
+            DestinatarioUsuarioId = request.DestinatarioUsuarioId,
             Status = request.Status
         };
 
@@ -40,17 +43,20 @@ public class CriarEntregaUseCase : ICriarEntregaUseCase
         return new CriarEntregaResponse
         {
             Id = entrega.Id,
+            Codigo = entrega.Codigo,
             Nome = entrega.Nome,
-            Cidade = entrega.Cidade,
-            Estado = entrega.Estado,
-            Cep = entrega.Cep,
-            Bairro = entrega.Bairro,
-            Rua = entrega.Rua,
-            Numero = entrega.Numero,
-            Complemento = entrega.Complemento,
+            Descricao = entrega.Descricao,
+            Observacoes = entrega.Observacoes,
+            ClienteNome = entrega.ClienteNome,
+            ClienteTelefone = entrega.ClienteTelefone,
             DataPedido = entrega.DataPedido,
+            DataPrevista = entrega.DataPrevista,
+            PrevisaoChegada = entrega.PrevisaoChegada,
             DataEntrega = entrega.DataEntrega,
-            Entregador = entrega.Entregador,
+            EnderecoId = entrega.EnderecoId,
+            MotoristaId = entrega.MotoristaId,
+            VeiculoId = entrega.VeiculoId,
+            DestinatarioUsuarioId = entrega.DestinatarioUsuarioId,
             Status = entrega.Status
         };
     }
@@ -62,49 +68,24 @@ public class CriarEntregaUseCase : ICriarEntregaUseCase
             throw new ArgumentException("O nome da entrega e obrigatorio.");
         }
 
-        if (string.IsNullOrWhiteSpace(request.Cidade))
+        if (string.IsNullOrWhiteSpace(request.Codigo))
         {
-            throw new ArgumentException("A cidade da entrega e obrigatoria.");
+            throw new ArgumentException("O codigo da entrega e obrigatorio.");
         }
 
-        if (string.IsNullOrWhiteSpace(request.Estado))
+        if (string.IsNullOrWhiteSpace(request.ClienteNome))
         {
-            throw new ArgumentException("O estado da entrega e obrigatorio.");
+            throw new ArgumentException("O nome do cliente e obrigatorio.");
         }
 
-        if (string.IsNullOrWhiteSpace(request.Bairro))
+        if (string.IsNullOrWhiteSpace(request.ClienteTelefone))
         {
-            throw new ArgumentException("O bairro da entrega e obrigatorio.");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.Rua))
-        {
-            throw new ArgumentException("A rua da entrega e obrigatoria.");
+            throw new ArgumentException("O telefone do cliente e obrigatorio.");
         }
 
         if (string.IsNullOrWhiteSpace(request.DataPedido))
         {
             throw new ArgumentException("A data do pedido e obrigatoria.");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.DataEntrega))
-        {
-            throw new ArgumentException("A data da entrega e obrigatoria.");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.Entregador))
-        {
-            throw new ArgumentException("O entregador e obrigatorio.");
-        }
-
-        if (request.Cep <= 0)
-        {
-            throw new ArgumentException("O CEP da entrega deve ser maior que zero.");
-        }
-
-        if (request.Numero <= 0)
-        {
-            throw new ArgumentException("O numero da entrega deve ser maior que zero.");
         }
     }
 }

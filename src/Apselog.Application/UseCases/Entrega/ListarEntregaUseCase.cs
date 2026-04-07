@@ -34,22 +34,42 @@ public class ListarEntregaUseCase : IListarEntregaUseCase
             query = query.Where(entrega => entrega.Id == request.Id.Value);
         }
 
+        if (!string.IsNullOrWhiteSpace(request.Codigo))
+        {
+            query = query.Where(entrega =>
+                entrega.Codigo.Contains(request.Codigo, StringComparison.OrdinalIgnoreCase));
+        }
+
         if (!string.IsNullOrWhiteSpace(request.Nome))
         {
             query = query.Where(entrega =>
                 entrega.Nome.Contains(request.Nome, StringComparison.OrdinalIgnoreCase));
         }
 
-        if (!string.IsNullOrWhiteSpace(request.Cidade))
+        if (!string.IsNullOrWhiteSpace(request.ClienteNome))
         {
             query = query.Where(entrega =>
-                entrega.Cidade.Contains(request.Cidade, StringComparison.OrdinalIgnoreCase));
+                entrega.ClienteNome.Contains(request.ClienteNome, StringComparison.OrdinalIgnoreCase));
         }
 
-        if (!string.IsNullOrWhiteSpace(request.Entregador))
+        if (request.MotoristaId.HasValue)
         {
-            query = query.Where(entrega =>
-                entrega.Entregador.Contains(request.Entregador, StringComparison.OrdinalIgnoreCase));
+            query = query.Where(entrega => entrega.MotoristaId == request.MotoristaId.Value);
+        }
+
+        if (request.VeiculoId.HasValue)
+        {
+            query = query.Where(entrega => entrega.VeiculoId == request.VeiculoId.Value);
+        }
+
+        if (request.DestinatarioUsuarioId.HasValue)
+        {
+            query = query.Where(entrega => entrega.DestinatarioUsuarioId == request.DestinatarioUsuarioId.Value);
+        }
+
+        if (request.EnderecoId.HasValue)
+        {
+            query = query.Where(entrega => entrega.EnderecoId == request.EnderecoId.Value);
         }
 
         if (request.Status.HasValue)
@@ -68,17 +88,20 @@ public class ListarEntregaUseCase : IListarEntregaUseCase
         return query.Select(entrega => new ListarEntregaResponse
         {
             Id = entrega.Id,
+            Codigo = entrega.Codigo,
             Nome = entrega.Nome,
-            Cidade = entrega.Cidade,
-            Estado = entrega.Estado,
-            Cep = entrega.Cep,
-            Bairro = entrega.Bairro,
-            Rua = entrega.Rua,
-            Numero = entrega.Numero,
-            Complemento = entrega.Complemento,
+            Descricao = entrega.Descricao,
+            Observacoes = entrega.Observacoes,
+            ClienteNome = entrega.ClienteNome,
+            ClienteTelefone = entrega.ClienteTelefone,
             DataPedido = entrega.DataPedido,
+            DataPrevista = entrega.DataPrevista,
+            PrevisaoChegada = entrega.PrevisaoChegada,
             DataEntrega = entrega.DataEntrega,
-            Entregador = entrega.Entregador,
+            EnderecoId = entrega.EnderecoId,
+            MotoristaId = entrega.MotoristaId,
+            VeiculoId = entrega.VeiculoId,
+            DestinatarioUsuarioId = entrega.DestinatarioUsuarioId,
             Status = entrega.Status
         });
     }
@@ -98,16 +121,16 @@ public class ListarEntregaUseCase : IListarEntregaUseCase
         return ordenarPor.Trim().ToLowerInvariant() switch
         {
             "id" => ascendente ? entregas.OrderBy(entrega => entrega.Id) : entregas.OrderByDescending(entrega => entrega.Id),
+            "codigo" => ascendente ? entregas.OrderBy(entrega => entrega.Codigo) : entregas.OrderByDescending(entrega => entrega.Codigo),
             "nome" => ascendente ? entregas.OrderBy(entrega => entrega.Nome) : entregas.OrderByDescending(entrega => entrega.Nome),
-            "cidade" => ascendente ? entregas.OrderBy(entrega => entrega.Cidade) : entregas.OrderByDescending(entrega => entrega.Cidade),
-            "estado" => ascendente ? entregas.OrderBy(entrega => entrega.Estado) : entregas.OrderByDescending(entrega => entrega.Estado),
-            "cep" => ascendente ? entregas.OrderBy(entrega => entrega.Cep) : entregas.OrderByDescending(entrega => entrega.Cep),
-            "bairro" => ascendente ? entregas.OrderBy(entrega => entrega.Bairro) : entregas.OrderByDescending(entrega => entrega.Bairro),
-            "rua" => ascendente ? entregas.OrderBy(entrega => entrega.Rua) : entregas.OrderByDescending(entrega => entrega.Rua),
-            "numero" => ascendente ? entregas.OrderBy(entrega => entrega.Numero) : entregas.OrderByDescending(entrega => entrega.Numero),
+            "clientenome" => ascendente ? entregas.OrderBy(entrega => entrega.ClienteNome) : entregas.OrderByDescending(entrega => entrega.ClienteNome),
+            "clientetelefone" => ascendente ? entregas.OrderBy(entrega => entrega.ClienteTelefone) : entregas.OrderByDescending(entrega => entrega.ClienteTelefone),
             "datapedido" => ascendente ? entregas.OrderBy(entrega => entrega.DataPedido) : entregas.OrderByDescending(entrega => entrega.DataPedido),
+            "dataprevista" => ascendente ? entregas.OrderBy(entrega => entrega.DataPrevista) : entregas.OrderByDescending(entrega => entrega.DataPrevista),
+            "previsaochegada" => ascendente ? entregas.OrderBy(entrega => entrega.PrevisaoChegada) : entregas.OrderByDescending(entrega => entrega.PrevisaoChegada),
             "dataentrega" => ascendente ? entregas.OrderBy(entrega => entrega.DataEntrega) : entregas.OrderByDescending(entrega => entrega.DataEntrega),
-            "entregador" => ascendente ? entregas.OrderBy(entrega => entrega.Entregador) : entregas.OrderByDescending(entrega => entrega.Entregador),
+            "motoristaid" => ascendente ? entregas.OrderBy(entrega => entrega.MotoristaId) : entregas.OrderByDescending(entrega => entrega.MotoristaId),
+            "veiculoid" => ascendente ? entregas.OrderBy(entrega => entrega.VeiculoId) : entregas.OrderByDescending(entrega => entrega.VeiculoId),
             "status" => ascendente ? entregas.OrderBy(entrega => entrega.Status) : entregas.OrderByDescending(entrega => entrega.Status),
             _ => throw new ArgumentException("Campo de ordenacao invalido.")
         };
