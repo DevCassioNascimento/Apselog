@@ -1,9 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
+using Apselog.Application.UseCases.Assinatura;
 using Apselog.Application.UseCases.Entrega;
 using Apselog.Application.UseCases;
 using Apselog.Application.UseCases.Motorista;
 using Apselog.Application.UseCases.Veiculo;
 using Apselog.Application.UseCases.Interfaces;
+using Apselog.Application.UseCases.Interfaces.Assinatura;
 using Apselog.Application.UseCases.Interfaces.Entrega;
 using Apselog.Application.UseCases.Interfaces.Motorista;
 using Apselog.Application.UseCases.Interfaces.Veiculo;
@@ -18,11 +20,16 @@ public static class DependencyInjection
         services.AddScoped<ICriarUserUseCase, CriarUserUseCase>();
         services.AddScoped<IAtualizarUserUseCase, AtualizarUserUseCase>();
         services.AddScoped<IDeletarUserUseCase, DeletarUserUseCase>();
-        services.AddScoped<ICriarEntregaUseCase, CriarEntregaUseCase>();
         //Entrega
+        services.AddScoped<ICriarEntregaUseCase, CriarEntregaUseCase>();
         services.AddScoped<IAtualizarEntregaUseCase, AtualizarEntregaUseCase>();
         services.AddScoped<IListarEntregaUseCase, ListarEntregaUseCase>();
         services.AddScoped<IExcluirEntregaUseCase, ExcluirEntregaUseCase>();
+        // Assinatura
+        services.AddScoped<ICriarAssinaturaUseCase, CriarAssinaturaUseCase>();
+        services.AddScoped<IAtualizarAssinaturaUseCase, AtualizarAssinaturaUseCase>();
+        services.AddScoped<IListarAssinaturaUseCase, ListarAssinaturaUseCase>();
+        services.AddScoped<IExcluirAssinaturaUseCase, ExcluirAssinaturaUseCase>();
         // Motorista
         services.AddScoped<ICriarMotoristaUseCase, CriarMotoristaUseCase>();
         services.AddScoped<IAtualizarMotoristaUseCase, AtualizarMotoristaUseCase>();
