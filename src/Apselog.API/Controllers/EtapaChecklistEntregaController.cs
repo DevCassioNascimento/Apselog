@@ -1,10 +1,12 @@
 using Apselog.Application.DTOs.Request.EtapaChecklistEntrega;
 using Apselog.Application.UseCases.Interfaces.EtapaChecklistEntrega;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Apselog.API.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class EtapaChecklistEntregaController : ControllerBase
 {

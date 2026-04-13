@@ -1,10 +1,12 @@
 using Apselog.Application.DTOs.Request.Endereco;
 using Apselog.Application.UseCases.Interfaces.Endereco;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Apselog.API.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class EnderecoController : ControllerBase
 {
