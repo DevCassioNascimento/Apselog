@@ -17,6 +17,7 @@ public static class DependencyInjection
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAssinaturaRepository, AssinaturaRepository>();
         services.AddScoped<IEnderecoRepository, EnderecoRepository>();
         services.AddScoped<IEntregaRepository, EntregaRepository>();
         services.AddScoped<IEtapaChecklistEntregaRepository, EtapaChecklistEntregaRepository>();
