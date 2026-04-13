@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using System.Text;
 using Apselog.Application.DTOs.Request;
 using Apselog.Application.DTOs.Response;
 using Apselog.Application.UseCases.Interfaces;
@@ -11,10 +9,12 @@ namespace Apselog.Application.UseCases;
 public class CriarUserUseCase : ICriarUserUseCase
 {
     private readonly IUserRepository _userRepository;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public CriarUserUseCase(IUserRepository userRepository)
+    public CriarUserUseCase(IUserRepository userRepository, IPasswordHasher passwordHasher)
     {
         _userRepository = userRepository;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<UserResponse> ExecutarAsync(CriarUserRequest request)
@@ -45,7 +45,7 @@ public class CriarUserUseCase : ICriarUserUseCase
         {
             Nome = request.Nome,
             Email = request.Email,
-            SenhaHash = GerarHashSenha(request.Senha),
+            SenhaHash = _passwordHasher.HashPassword(request.Senha),
             Cargo = request.Cargo,
             Instituicao = request.Instituicao,
             Role = request.Role,
@@ -64,13 +64,5 @@ public class CriarUserUseCase : ICriarUserUseCase
             Role = user.Role,
             Status = user.Status
         };
-    }
-
-    private static string GerarHashSenha(string senha)
-    {
-        var senhaBytes = Encoding.UTF8.GetBytes(senha);
-        var hashBytes = SHA256.HashData(senhaBytes);
-
-        return Convert.ToBase64String(hashBytes);
     }
 }

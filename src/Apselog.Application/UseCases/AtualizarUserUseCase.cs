@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using System.Text;
 using Apselog.Application.DTOs.Request;
 using Apselog.Application.DTOs.Response;
 using Apselog.Application.UseCases.Interfaces;
@@ -10,10 +8,12 @@ namespace Apselog.Application.UseCases;
 public class AtualizarUserUseCase : IAtualizarUserUseCase
 {
     private readonly IUserRepository _userRepository;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public AtualizarUserUseCase(IUserRepository userRepository)
+    public AtualizarUserUseCase(IUserRepository userRepository, IPasswordHasher passwordHasher)
     {
         _userRepository = userRepository;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<UserResponse> ExecutarAsync(AtualizarUserRequest request)
@@ -51,7 +51,7 @@ public class AtualizarUserUseCase : IAtualizarUserUseCase
 
         if (!string.IsNullOrWhiteSpace(request.Senha))
         {
-            user.SenhaHash = GerarHashSenha(request.Senha);
+            user.SenhaHash = _passwordHasher.HashPassword(request.Senha);
         }
 
         await _userRepository.UpdateAsync(user);
@@ -66,13 +66,5 @@ public class AtualizarUserUseCase : IAtualizarUserUseCase
             Role = user.Role,
             Status = user.Status
         };
-    }
-
-    private static string GerarHashSenha(string senha)
-    {
-        var senhaBytes = Encoding.UTF8.GetBytes(senha);
-        var hashBytes = SHA256.HashData(senhaBytes);
-
-        return Convert.ToBase64String(hashBytes);
     }
 }

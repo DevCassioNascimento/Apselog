@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using System.Text;
 using Apselog.Application.DTOs.Request.Motorista;
 using Apselog.Application.DTOs.Response.Motorista;
 using Apselog.Application.UseCases.Interfaces.Motorista;
@@ -10,10 +8,12 @@ namespace Apselog.Application.UseCases.Motorista;
 public class AtualizarMotoristaUseCase : IAtualizarMotoristaUseCase
 {
     private readonly IMotoristaRepository _motoristaRepository;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public AtualizarMotoristaUseCase(IMotoristaRepository motoristaRepository)
+    public AtualizarMotoristaUseCase(IMotoristaRepository motoristaRepository, IPasswordHasher passwordHasher)
     {
         _motoristaRepository = motoristaRepository;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<AtualizarMotoristaResponse> ExecutarAsync(AtualizarMotoristaRequest request)
@@ -40,7 +40,7 @@ public class AtualizarMotoristaUseCase : IAtualizarMotoristaUseCase
 
         if (!string.IsNullOrWhiteSpace(request.Senha))
         {
-            motorista.SenhaHash = GerarHashSenha(request.Senha);
+            motorista.SenhaHash = _passwordHasher.HashPassword(request.Senha);
         }
 
         await _motoristaRepository.UpdateAsync(motorista);
@@ -65,13 +65,5 @@ public class AtualizarMotoristaUseCase : IAtualizarMotoristaUseCase
         {
             throw new ArgumentException("O e-mail do motorista e obrigatorio.");
         }
-    }
-
-    private static string GerarHashSenha(string senha)
-    {
-        var senhaBytes = Encoding.UTF8.GetBytes(senha);
-        var hashBytes = SHA256.HashData(senhaBytes);
-
-        return Convert.ToBase64String(hashBytes);
     }
 }

@@ -1,9 +1,6 @@
-using System.Security.Cryptography;
-using System.Text;
 using Apselog.Application.DTOs.Request.Motorista;
 using Apselog.Application.DTOs.Response.Motorista;
 using Apselog.Application.UseCases.Interfaces.Motorista;
-using Apselog.Domain.Entities;
 using Apselog.Domain.Interfaces.Repositories;
 
 namespace Apselog.Application.UseCases.Motorista;
@@ -11,10 +8,12 @@ namespace Apselog.Application.UseCases.Motorista;
 public class CriarMotoristaUseCase : ICriarMotoristaUseCase
 {
     private readonly IMotoristaRepository _motoristaRepository;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public CriarMotoristaUseCase(IMotoristaRepository motoristaRepository)
+    public CriarMotoristaUseCase(IMotoristaRepository motoristaRepository, IPasswordHasher passwordHasher)
     {
         _motoristaRepository = motoristaRepository;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<CriarMotoristaResponse> ExecutarAsync(CriarMotoristaRequest request)
@@ -32,7 +31,7 @@ public class CriarMotoristaUseCase : ICriarMotoristaUseCase
         {
             Nome = request.Nome,
             Email = request.Email,
-            SenhaHash = GerarHashSenha(request.Senha),
+            SenhaHash = _passwordHasher.HashPassword(request.Senha),
             Status = request.Status
         };
 
@@ -63,13 +62,5 @@ public class CriarMotoristaUseCase : ICriarMotoristaUseCase
         {
             throw new ArgumentException("A senha do motorista e obrigatoria.");
         }
-    }
-
-    private static string GerarHashSenha(string senha)
-    {
-        var senhaBytes = Encoding.UTF8.GetBytes(senha);
-        var hashBytes = SHA256.HashData(senhaBytes);
-
-        return Convert.ToBase64String(hashBytes);
     }
 }

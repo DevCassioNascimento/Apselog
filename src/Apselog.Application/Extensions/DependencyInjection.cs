@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<ICriarUserUseCase, CriarUserUseCase>();
         services.AddScoped<IAtualizarUserUseCase, AtualizarUserUseCase>();
         services.AddScoped<IDeletarUserUseCase, DeletarUserUseCase>();
+        services.AddScoped<ILoginUseCase, LoginUseCase>();
         //Entrega
         services.AddScoped<ICriarEntregaUseCase, CriarEntregaUseCase>();
         services.AddScoped<IAtualizarEntregaUseCase, AtualizarEntregaUseCase>();

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Apselog.Domain.Interfaces.Repositories;
 using Apselog.Infrastructure.Contexts;
 using Apselog.Infrastructure.Repositories;
+using Apselog.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 
 namespace Apselog.Infrastructure.Extensions;
@@ -16,6 +17,8 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+        services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
+
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAssinaturaRepository, AssinaturaRepository>();
         services.AddScoped<IEnderecoRepository, EnderecoRepository>();
@@ -27,6 +30,8 @@ public static class DependencyInjection
         services.AddScoped<IMotoristaRepository, MotoristaRepository>();
         services.AddScoped<INotificacaoRepository, NotificacaoRepository>();
         services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+        services.AddScoped<IJwtProvider, JwtProvider>();
+        services.AddScoped<IPasswordHasher, Pbkdf2PasswordHasher>();
 
         return services;
     }
