@@ -17,8 +17,14 @@ public static class DependencyInjection
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IEnderecoRepository, EnderecoRepository>();
         services.AddScoped<IEntregaRepository, EntregaRepository>();
+        services.AddScoped<IEtapaChecklistEntregaRepository, EtapaChecklistEntregaRepository>();
+        services.AddScoped<IEtapaChecklistModeloRepository, EtapaChecklistModeloRepository>();
+        services.AddScoped<IEventoEntregaRepository, EventoEntregaRepository>();
+        services.AddScoped<IItemEntregaRepository, ItemEntregaRepository>();
         services.AddScoped<IMotoristaRepository, MotoristaRepository>();
+        services.AddScoped<INotificacaoRepository, NotificacaoRepository>();
         services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 
         return services;
