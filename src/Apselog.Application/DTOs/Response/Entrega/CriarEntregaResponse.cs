@@ -14,6 +14,5 @@ public class CriarEntregaResponse
     public Guid? EnderecoId { get; set; }
     public Guid? MotoristaId { get; set; }
     public Guid? VeiculoId { get; set; }
-    public Guid? DestinatarioUsuarioId { get; set; }
     public EntregaStatus Status { get; set; }
 }

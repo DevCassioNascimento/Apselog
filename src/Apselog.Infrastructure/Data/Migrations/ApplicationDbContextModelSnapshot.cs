@@ -159,9 +159,6 @@ namespace Apselog.Infrastructure.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<Guid?>("DestinatarioUsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("EnderecoId")
                         .HasColumnType("uniqueidentifier");
 
@@ -182,8 +179,6 @@ namespace Apselog.Infrastructure.Data.Migrations
 
                     b.HasIndex("Codigo")
                         .IsUnique();
-
-                    b.HasIndex("DestinatarioUsuarioId");
 
                     b.HasIndex("EnderecoId");
 
@@ -554,11 +549,6 @@ namespace Apselog.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Apselog.Domain.Entities.Entrega", b =>
                 {
-                    b.HasOne("Apselog.Domain.Entities.User", "DestinatarioUsuario")
-                        .WithMany()
-                        .HasForeignKey("DestinatarioUsuarioId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("Apselog.Domain.Entities.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId")
@@ -573,8 +563,6 @@ namespace Apselog.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("VeiculoId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("DestinatarioUsuario");
 
                     b.Navigation("Endereco");
 

@@ -9,7 +9,6 @@ public class ListarEntregaRequest
     public string? ClienteNome { get; set; }
     public Guid? MotoristaId { get; set; }
     public Guid? VeiculoId { get; set; }
-    public Guid? DestinatarioUsuarioId { get; set; }
     public Guid? EnderecoId { get; set; }
     public EntregaStatus? Status { get; set; }
     public int? Page { get; set; }

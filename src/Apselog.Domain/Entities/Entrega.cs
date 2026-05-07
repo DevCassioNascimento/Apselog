@@ -17,7 +17,5 @@ public class Entrega
     public Motorista? Motorista { get; set; }
     public Guid? VeiculoId { get; set; }
     public Veiculo? Veiculo { get; set; }
-    public Guid? DestinatarioUsuarioId { get; set; }
-    public User? DestinatarioUsuario { get; set; }
     public EntregaStatus Status { get; set; } = EntregaStatus.Aberto;
 }

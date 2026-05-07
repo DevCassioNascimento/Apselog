@@ -56,11 +56,6 @@ public class ListarEntregaUseCase : IListarEntregaUseCase
             query = query.Where(entrega => entrega.VeiculoId == request.VeiculoId.Value);
         }
 
-        if (request.DestinatarioUsuarioId.HasValue)
-        {
-            query = query.Where(entrega => entrega.DestinatarioUsuarioId == request.DestinatarioUsuarioId.Value);
-        }
-
         if (request.EnderecoId.HasValue)
         {
             query = query.Where(entrega => entrega.EnderecoId == request.EnderecoId.Value);
@@ -104,10 +99,9 @@ public class ListarEntregaUseCase : IListarEntregaUseCase
                     Referencia = entrega.Endereco.Referencia,
                     Latitude = entrega.Endereco.Latitude,
                     Longitude = entrega.Endereco.Longitude
-                },
+            },
             MotoristaId = entrega.MotoristaId,
             VeiculoId = entrega.VeiculoId,
-            DestinatarioUsuarioId = entrega.DestinatarioUsuarioId,
             Status = entrega.Status
         });
     }

@@ -46,8 +46,6 @@ public class EntregaMapping : IEntityTypeConfiguration<Entrega>
 
         builder.Property(x => x.VeiculoId);
 
-        builder.Property(x => x.DestinatarioUsuarioId);
-
         builder.Property(x => x.Status)
             .IsRequired()
             .HasConversion<int>();
@@ -65,11 +63,6 @@ public class EntregaMapping : IEntityTypeConfiguration<Entrega>
         builder.HasOne(x => x.Veiculo)
             .WithMany()
             .HasForeignKey(x => x.VeiculoId)
-            .OnDelete(DeleteBehavior.SetNull);
-
-        builder.HasOne(x => x.DestinatarioUsuario)
-            .WithMany()
-            .HasForeignKey(x => x.DestinatarioUsuarioId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }
