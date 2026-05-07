@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<User> Users => Set<User>();
+    public DbSet<Assinatura> Assinaturas => Set<Assinatura>();
     public DbSet<Endereco> Enderecos => Set<Endereco>();
     public DbSet<Entrega> Entregas => Set<Entrega>();
     public DbSet<EtapaChecklistEntrega> EtapasChecklistEntrega => Set<EtapaChecklistEntrega>();

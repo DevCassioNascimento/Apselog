@@ -16,13 +16,16 @@ public class EntregaRepository : IEntregaRepository
 
     public async Task<Entrega?> GetByIdAsync(Guid id)
     {
-        return await _context.Set<Entrega>().FirstOrDefaultAsync(entrega => entrega.Id == id);
+        return await _context.Set<Entrega>()
+            .Include(entrega => entrega.Endereco)
+            .FirstOrDefaultAsync(entrega => entrega.Id == id);
     }
 
     public async Task<IEnumerable<Entrega>> GetAllAsync()
     {
         return await _context.Set<Entrega>()
             .AsNoTracking()
+            .Include(entrega => entrega.Endereco)
             .ToListAsync();
     }
 

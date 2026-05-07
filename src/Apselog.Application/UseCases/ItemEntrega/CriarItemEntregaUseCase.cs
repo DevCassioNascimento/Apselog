@@ -23,10 +23,8 @@ public class CriarItemEntregaUseCase : ICriarItemEntregaUseCase
             EntregaId = request.EntregaId,
             Nome = request.Nome,
             Descricao = request.Descricao,
-            Sku = request.Sku,
             Quantidade = request.Quantidade,
             Unidade = request.Unidade,
-            ValorDeclarado = request.ValorDeclarado,
             Ordem = request.Ordem
         };
 
@@ -38,10 +36,8 @@ public class CriarItemEntregaUseCase : ICriarItemEntregaUseCase
             EntregaId = itemEntrega.EntregaId,
             Nome = itemEntrega.Nome,
             Descricao = itemEntrega.Descricao,
-            Sku = itemEntrega.Sku,
             Quantidade = itemEntrega.Quantidade,
             Unidade = itemEntrega.Unidade,
-            ValorDeclarado = itemEntrega.ValorDeclarado,
             Ordem = itemEntrega.Ordem
         };
     }

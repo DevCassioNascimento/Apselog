@@ -28,10 +28,8 @@ public class AtualizarItemEntregaUseCase : IAtualizarItemEntregaUseCase
         itemEntrega.EntregaId = request.EntregaId;
         itemEntrega.Nome = request.Nome;
         itemEntrega.Descricao = request.Descricao;
-        itemEntrega.Sku = request.Sku;
         itemEntrega.Quantidade = request.Quantidade;
         itemEntrega.Unidade = request.Unidade;
-        itemEntrega.ValorDeclarado = request.ValorDeclarado;
         itemEntrega.Ordem = request.Ordem;
 
         await _itemEntregaRepository.UpdateAsync(itemEntrega);
@@ -42,10 +40,8 @@ public class AtualizarItemEntregaUseCase : IAtualizarItemEntregaUseCase
             EntregaId = itemEntrega.EntregaId,
             Nome = itemEntrega.Nome,
             Descricao = itemEntrega.Descricao,
-            Sku = itemEntrega.Sku,
             Quantidade = itemEntrega.Quantidade,
             Unidade = itemEntrega.Unidade,
-            ValorDeclarado = itemEntrega.ValorDeclarado,
             Ordem = itemEntrega.Ordem
         };
     }

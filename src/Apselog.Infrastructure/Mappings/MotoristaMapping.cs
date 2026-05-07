@@ -30,9 +30,16 @@ public class MotoristaMapping : IEntityTypeConfiguration<Motorista>
             .IsRequired()
             .HasMaxLength(500);
 
+        builder.Property(x => x.UsuarioId);
+
         builder.Property(x => x.Status)
             .IsRequired()
             .HasConversion<int>();
+
+        builder.HasOne(x => x.Usuario)
+            .WithMany()
+            .HasForeignKey(x => x.UsuarioId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasMany(x => x.Veiculos)
             .WithOne(x => x.Motorista)

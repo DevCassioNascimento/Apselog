@@ -1,6 +1,29 @@
 @Apselog.API_HostAddress = http://localhost:5011
+@email = admin@exemplo.com
+@senha = 123456
 
-GET {{Apselog.API_HostAddress}}/weatherforecast/
+### Login
+POST {{Apselog.API_HostAddress}}/api/Auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "senha": "{{senha}}"
+}
+
+> {%
+  client.global.set("jwt_token", response.body.token);
+%}
+
+###
+GET {{Apselog.API_HostAddress}}/api/Entrega
 Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+
+GET {{Apselog.API_HostAddress}}/api/Endereco
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
 
 ###

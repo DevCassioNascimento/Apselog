@@ -33,7 +33,7 @@ public class EtapaChecklistEntregaController : ControllerBase
         try
         {
             var response = await _criarEtapaChecklistEntregaUseCase.ExecutarAsync(request);
-            return CreatedAtAction(nameof(CriarAsync), new { id = response.Id }, response);
+            return StatusCode(StatusCodes.Status201Created, response);
         }
         catch (ArgumentException ex)
         {

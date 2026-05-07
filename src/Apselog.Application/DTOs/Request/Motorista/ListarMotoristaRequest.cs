@@ -5,6 +5,7 @@ namespace Apselog.Application.DTOs.Request.Motorista;
 public class ListarMotoristaRequest
 {
     public Guid? Id { get; set; }
+    public Guid? UsuarioId { get; set; }
     public string? Nome { get; set; }
     public string? Email { get; set; }
     public MotoristaStatus? Status { get; set; }

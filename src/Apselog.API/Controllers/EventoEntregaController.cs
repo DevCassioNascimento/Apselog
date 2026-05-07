@@ -33,7 +33,7 @@ public class EventoEntregaController : ControllerBase
         try
         {
             var response = await _criarEventoEntregaUseCase.ExecutarAsync(request);
-            return CreatedAtAction(nameof(CriarAsync), new { id = response.Id }, response);
+            return StatusCode(StatusCodes.Status201Created, response);
         }
         catch (ArgumentException ex)
         {

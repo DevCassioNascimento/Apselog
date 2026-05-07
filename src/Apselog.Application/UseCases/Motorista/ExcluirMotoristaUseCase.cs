@@ -8,10 +8,12 @@ namespace Apselog.Application.UseCases.Motorista;
 public class ExcluirMotoristaUseCase : IExcluirMotoristaUseCase
 {
     private readonly IMotoristaRepository _motoristaRepository;
+    private readonly IUserRepository _userRepository;
 
-    public ExcluirMotoristaUseCase(IMotoristaRepository motoristaRepository)
+    public ExcluirMotoristaUseCase(IMotoristaRepository motoristaRepository, IUserRepository userRepository)
     {
         _motoristaRepository = motoristaRepository;
+        _userRepository = userRepository;
     }
 
     public async Task<ExcluirMotoristaResponse> ExecutarAsync(ExcluirMotoristaRequest request)
@@ -21,6 +23,11 @@ public class ExcluirMotoristaUseCase : IExcluirMotoristaUseCase
         if (motorista is null)
         {
             throw new KeyNotFoundException("Motorista nao encontrado.");
+        }
+
+        if (motorista.UsuarioId.HasValue)
+        {
+            await _userRepository.DeleteAsync(motorista.UsuarioId.Value);
         }
 
         await _motoristaRepository.DeleteAsync(request.Id);

@@ -33,11 +33,15 @@ public class EntregaController : ControllerBase
         try
         {
             var response = await _criarEntregaUseCase.ExecutarAsync(request);
-            return CreatedAtAction(nameof(CriarAsync), new { id = response.Id }, response);
+            return StatusCode(StatusCodes.Status201Created, response);
         }
         catch (ArgumentException ex)
         {
             return BadRequest(new { mensagem = ex.Message });
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { mensagem = ex.Message });
         }
     }
 

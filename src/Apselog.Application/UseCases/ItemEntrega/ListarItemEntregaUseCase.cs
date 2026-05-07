@@ -41,12 +41,6 @@ public class ListarItemEntregaUseCase : IListarItemEntregaUseCase
                 itemEntrega.Nome.Contains(request.Nome, StringComparison.OrdinalIgnoreCase));
         }
 
-        if (!string.IsNullOrWhiteSpace(request.Sku))
-        {
-            query = query.Where(itemEntrega =>
-                (itemEntrega.Sku ?? string.Empty).Contains(request.Sku, StringComparison.OrdinalIgnoreCase));
-        }
-
         if (request.Ordem.HasValue)
         {
             query = query.Where(itemEntrega => itemEntrega.Ordem == request.Ordem.Value);
@@ -66,10 +60,8 @@ public class ListarItemEntregaUseCase : IListarItemEntregaUseCase
             EntregaId = itemEntrega.EntregaId,
             Nome = itemEntrega.Nome,
             Descricao = itemEntrega.Descricao,
-            Sku = itemEntrega.Sku,
             Quantidade = itemEntrega.Quantidade,
             Unidade = itemEntrega.Unidade,
-            ValorDeclarado = itemEntrega.ValorDeclarado,
             Ordem = itemEntrega.Ordem
         });
     }
@@ -91,10 +83,8 @@ public class ListarItemEntregaUseCase : IListarItemEntregaUseCase
             "id" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.Id) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.Id),
             "entregaid" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.EntregaId) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.EntregaId),
             "nome" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.Nome) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.Nome),
-            "sku" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.Sku) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.Sku),
             "quantidade" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.Quantidade) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.Quantidade),
             "unidadade" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.Unidade) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.Unidade),
-            "valordeclarado" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.ValorDeclarado) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.ValorDeclarado),
             "ordem" => ascendente ? itensEntrega.OrderBy(itemEntrega => itemEntrega.Ordem) : itensEntrega.OrderByDescending(itemEntrega => itemEntrega.Ordem),
             _ => throw new ArgumentException("Campo de ordenacao invalido.")
         };

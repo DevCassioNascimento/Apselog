@@ -33,6 +33,11 @@ public class ListarMotoristaUseCase : IListarMotoristaUseCase
             query = query.Where(motorista => motorista.Id == request.Id.Value);
         }
 
+        if (request.UsuarioId.HasValue)
+        {
+            query = query.Where(motorista => motorista.UsuarioId == request.UsuarioId.Value);
+        }
+
         if (!string.IsNullOrWhiteSpace(request.Nome))
         {
             query = query.Where(motorista =>
@@ -61,6 +66,7 @@ public class ListarMotoristaUseCase : IListarMotoristaUseCase
         return query.Select(motorista => new ListarMotoristaResponse
         {
             Id = motorista.Id,
+            UsuarioId = motorista.UsuarioId,
             Nome = motorista.Nome,
             Email = motorista.Email,
             Status = motorista.Status
@@ -82,6 +88,7 @@ public class ListarMotoristaUseCase : IListarMotoristaUseCase
         return ordenarPor.Trim().ToLowerInvariant() switch
         {
             "id" => ascendente ? motoristas.OrderBy(motorista => motorista.Id) : motoristas.OrderByDescending(motorista => motorista.Id),
+            "usuarioid" => ascendente ? motoristas.OrderBy(motorista => motorista.UsuarioId) : motoristas.OrderByDescending(motorista => motorista.UsuarioId),
             "nome" => ascendente ? motoristas.OrderBy(motorista => motorista.Nome) : motoristas.OrderByDescending(motorista => motorista.Nome),
             "email" => ascendente ? motoristas.OrderBy(motorista => motorista.Email) : motoristas.OrderByDescending(motorista => motorista.Email),
             "status" => ascendente ? motoristas.OrderBy(motorista => motorista.Status) : motoristas.OrderByDescending(motorista => motorista.Status),

@@ -25,17 +25,11 @@ public class ItemEntregaMapping : IEntityTypeConfiguration<ItemEntrega>
         builder.Property(x => x.Descricao)
             .HasMaxLength(500);
 
-        builder.Property(x => x.Sku)
-            .HasMaxLength(100);
-
         builder.Property(x => x.Quantidade)
             .IsRequired();
 
         builder.Property(x => x.Unidade)
             .HasMaxLength(30);
-
-        builder.Property(x => x.ValorDeclarado)
-            .HasPrecision(18, 2);
 
         builder.Property(x => x.Ordem)
             .IsRequired();

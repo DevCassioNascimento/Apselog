@@ -33,7 +33,7 @@ public class NotificacaoController : ControllerBase
         try
         {
             var response = await _criarNotificacaoUseCase.ExecutarAsync(request);
-            return CreatedAtAction(nameof(CriarAsync), new { id = response.Id }, response);
+            return StatusCode(StatusCodes.Status201Created, response);
         }
         catch (ArgumentException ex)
         {

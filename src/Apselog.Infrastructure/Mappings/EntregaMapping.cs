@@ -22,10 +22,6 @@ public class EntregaMapping : IEntityTypeConfiguration<Entrega>
         builder.HasIndex(x => x.Codigo)
             .IsUnique();
 
-        builder.Property(x => x.Nome)
-            .IsRequired()
-            .HasMaxLength(150);
-
         builder.Property(x => x.Descricao)
             .HasMaxLength(500);
 
@@ -44,15 +40,6 @@ public class EntregaMapping : IEntityTypeConfiguration<Entrega>
             .IsRequired()
             .HasMaxLength(50);
 
-        builder.Property(x => x.DataPrevista)
-            .HasMaxLength(50);
-
-        builder.Property(x => x.PrevisaoChegada)
-            .HasMaxLength(50);
-
-        builder.Property(x => x.DataEntrega)
-            .HasMaxLength(50);
-
         builder.Property(x => x.EnderecoId);
 
         builder.Property(x => x.MotoristaId);
@@ -68,6 +55,11 @@ public class EntregaMapping : IEntityTypeConfiguration<Entrega>
         builder.HasOne(x => x.Motorista)
             .WithMany(x => x.Entregas)
             .HasForeignKey(x => x.MotoristaId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasOne(x => x.Endereco)
+            .WithMany()
+            .HasForeignKey(x => x.EnderecoId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasOne(x => x.Veiculo)
