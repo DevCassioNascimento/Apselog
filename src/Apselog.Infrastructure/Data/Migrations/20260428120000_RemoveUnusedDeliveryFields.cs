@@ -1,3 +1,5 @@
+using Apselog.Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -5,6 +7,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Apselog.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20260428120000_RemoveUnusedDeliveryFields")]
     public partial class RemoveUnusedDeliveryFields : Migration
     {
         /// <inheritdoc />

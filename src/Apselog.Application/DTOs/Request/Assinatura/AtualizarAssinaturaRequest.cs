@@ -11,6 +11,7 @@ public class AtualizarAssinaturaRequest
     public string? AssinadoPorDocumento { get; set; }
     public TipoAssinante AssinadoPorTipo { get; set; }
     public string? ImagemBase64 { get; set; }
+    public string? FotoEntregaBase64 { get; set; }
     public string? ArquivoUrl { get; set; }
     public string? IpOrigem { get; set; }
     public string? DeviceInfo { get; set; }

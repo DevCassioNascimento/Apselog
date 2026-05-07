@@ -31,6 +31,8 @@ public class AssinaturaMapping : IEntityTypeConfiguration<Assinatura>
 
         builder.Property(x => x.ImagemBase64);
 
+        builder.Property(x => x.FotoEntregaBase64);
+
         builder.Property(x => x.ArquivoUrl);
 
         builder.Property(x => x.IpOrigem);

@@ -31,6 +31,7 @@ public class AtualizarAssinaturaUseCase : IAtualizarAssinaturaUseCase
         assinatura.AssinadoPorDocumento = request.AssinadoPorDocumento;
         assinatura.AssinadoPorTipo = request.AssinadoPorTipo;
         assinatura.ImagemBase64 = request.ImagemBase64;
+        assinatura.FotoEntregaBase64 = request.FotoEntregaBase64;
         assinatura.ArquivoUrl = request.ArquivoUrl;
         assinatura.IpOrigem = request.IpOrigem;
         assinatura.DeviceInfo = request.DeviceInfo;
@@ -47,6 +48,7 @@ public class AtualizarAssinaturaUseCase : IAtualizarAssinaturaUseCase
             AssinadoPorDocumento = assinatura.AssinadoPorDocumento,
             AssinadoPorTipo = assinatura.AssinadoPorTipo,
             ImagemBase64 = assinatura.ImagemBase64,
+            FotoEntregaBase64 = assinatura.FotoEntregaBase64,
             ArquivoUrl = assinatura.ArquivoUrl,
             IpOrigem = assinatura.IpOrigem,
             DeviceInfo = assinatura.DeviceInfo,

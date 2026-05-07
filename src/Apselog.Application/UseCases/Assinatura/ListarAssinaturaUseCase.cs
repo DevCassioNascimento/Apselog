@@ -71,6 +71,7 @@ public class ListarAssinaturaUseCase : IListarAssinaturaUseCase
             AssinadoPorDocumento = assinatura.AssinadoPorDocumento,
             AssinadoPorTipo = assinatura.AssinadoPorTipo,
             ImagemBase64 = assinatura.ImagemBase64,
+            FotoEntregaBase64 = assinatura.FotoEntregaBase64,
             ArquivoUrl = assinatura.ArquivoUrl,
             IpOrigem = assinatura.IpOrigem,
             DeviceInfo = assinatura.DeviceInfo,

@@ -10,6 +10,7 @@ public class CriarAssinaturaRequest
     public string? AssinadoPorDocumento { get; set; }
     public TipoAssinante AssinadoPorTipo { get; set; } = TipoAssinante.Destinatario;
     public string? ImagemBase64 { get; set; }
+    public string? FotoEntregaBase64 { get; set; }
     public string? ArquivoUrl { get; set; }
     public string? IpOrigem { get; set; }
     public string? DeviceInfo { get; set; }

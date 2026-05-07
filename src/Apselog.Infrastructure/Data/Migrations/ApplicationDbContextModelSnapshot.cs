@@ -54,6 +54,9 @@ namespace Apselog.Infrastructure.Data.Migrations
                     b.Property<Guid?>("EtapaChecklistEntregaId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("FotoEntregaBase64")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImagemBase64")
                         .HasColumnType("nvarchar(max)");
 
